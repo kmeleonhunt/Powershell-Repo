@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-16" standalone="yes"?>
+<rules>
+  <rule name="RansomwareBlocking" id="a9a9a84c-797d-4ab6-9e85-7f08e38ef171" format="cmdlet">
+    <version requiredMinVersion="15.0.3.0">
+      <commandBlock><![CDATA[New-TransportRule -Name 'RansomwareBlocking' -Mode Enforce -SentToScope InOrganization -AttachmentExtensionMatchesWords 'ade', 'adp', 'ani', 'bas', 'bat', 'chm', 'cmd', 'com', 'cpl', 'crt', 'hlp', 'ht', 'hta', 'inf', 'ins', 'isp', 'job', 'js', 'jse', 'lnk', 'mda', 'mdb', 'mde', 'mdz', 'msc', 'msi', 'msp', 'mst', 'pcd', 'ps1', 'reg', 'scr', 'sct', 'shs', 'url', 'vb', 'vbe', 'vbs', 'wsc', 'wsf', 'wsh', 'exe', 'pif' -GenerateNotification 'You were sent a message containing a prohibited file type as an attachment.<br> <br> Message details: <br> <b>Sender</b> - %%From%%<br> <b>Subject</b> - %%Subject%%<br> <b>Message date</b> - %%MessageDate%%<br> <br> <b>Infected attachments are the number one way of contracting a ransomware virus that can encrypt your files irretrievably!</b><br> <br> This message and its attachments have been automatically deleted!<br> <br> The following file types are blocked:<br> ade, adp, ani, bas, bat, chm, cmd, com, cpl, crt, hlp, ht, hta, inf, ins, isp, job, js, jse, lnk, mda, mdb, mde, mdz, msc, msi, msp, mst, pcd, reg, scr, sct, shs, url, vb, vbe, vbs, wsc, wsf, wsh, exe, pif<br> <br> If you are legitimately expecting to receive an email with one of the blocked file types attached please ask the sender to resend the email without the attachment and make alternate arrangements to send the file. <br> A possible alternative is to upload the file to secure online storage and send a secure link instead.<br> <br><br> <p><img src=''https://portal.mspeasytools.co.uk/images/msptools/logosmall.png'' ></p>' -DeleteMessage $true]]></commandBlock>
+    </version>
+  </rule>
+  <rule name="RansomwareWarning" id="f9ff24e3-742e-413b-9b12-c87b011c9941" format="cmdlet">
+    <version requiredMinVersion="15.0.3.0">
+      <commandBlock><![CDATA[New-TransportRule -Name 'RansomwareWarning' -Mode Enforce -SentToScope InOrganization -AttachmentExtensionMatchesWords 'dotm', 'docm', 'xlsm', 'sltm', 'xla', 'xlam', 'xll', 'pptm', 'potm', 'ppam', 'ppsm', 'py', 'sh', 'sldm', 'one' -ApplyHtmlDisclaimerLocation Prepend -ApplyHtmlDisclaimerFallbackAction Wrap -ApplyHtmlDisclaimerText '<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 align=left width="100%" style=''width:100.0%;mso-cellspacing:0cm;mso-yfti-tbllook:1184; mso-table-lspace:2.25pt;mso-table-rspace:2.25pt;mso-table-anchor-vertical:paragraph;mso-table-anchor-horizontal:column;mso-table-left:left;mso-padding-alt:0cm 0cm 0cm 0cm''>  <tr style=''mso-yfti-irow:0;mso-yfti-firstrow:yes;mso-yfti-lastrow:yes''><td style=''background:#ffa826;padding:5.25pt 1.5pt 5.25pt 1.5pt''></td><td width="100%" style=''width:100.0%;background:#fffdde;padding:5.25pt 3.75pt 5.25pt 11.25pt; word-wrap:break-word'' cellpadding="7px 5px 7px 15px" color="#212121"><div><p class=MsoNormal style=''mso-element:frame;mso-element-frame-hspace:2.25pt; mso-element-wrap:around;mso-element-anchor-vertical:paragraph;mso-element-anchor-horizontal: column;mso-height-rule:exactly''><span style=''font-size:9.0pt;font-family: "Segoe UI",sans-serif;mso-fareast-font-family:"Times New Roman";color:#212121''><b>Warning, this email contains an attachment that could contain malicious code.</b><br>Infected attachments are the number one way of contracting a ransomware virus that can encrypt your files irretrievably!<br><b>DO NOT OPEN THE FILES</b> unless you were expecting them and trust the sender.  Even from a trusted sender these types of attachments should be treated with extreme caution and verified before opening if unsolicited!<o:p></o:p></span></p></div></td></tr></table><br><br>']]></commandBlock>
+    </version>
+  </rule>
+  <rule name="Junk Emails filter" id="9002ad9e-1a74-4228-8c49-4a37f89a44e0" format="cmdlet">
+    <version requiredMinVersion="15.0.3.0">
+      <commandBlock><![CDATA[New-TransportRule -Name 'Junk Emails filter' -Mode Enforce -SubjectOrBodyContainsWords 'Lord Jesus Christ', 'When my late husband was alive he deposited', 'I want you and the church to always pray for me because the lord is my shepherd', 'The Bible', 'Million of dollars', 'BTC', 'Crypto', 'It may take a few moments for this transaction to appear in your account.', 'You sent a payment of', 'Billion', 'I would like to publish an article on your website', 'gambling', 'A new collaboration with' -SetAuditSeverity 'Medium' -SetSCL 6 -Quarantine $true]]></commandBlock>
+    </version>
+  </rule>
+  <rule name="External Email Warning" id="24051b8d-3e0a-4e47-b575-471a2421ff73" format="cmdlet">
+    <version requiredMinVersion="15.0.3.0">
+      <commandBlock><![CDATA[New-TransportRule -Name 'External Email Warning' -Comments '
+' -Mode Enforce -RecipientDomainIs 'acaps.org' -FromScope NotInOrganization -ApplyHtmlDisclaimerLocation Prepend -ApplyHtmlDisclaimerFallbackAction Wrap -ApplyHtmlDisclaimerText '<!-- Yellow caution banner -->
+<table border=0 cellspacing=0 cellpadding=0 align="left" width="100%">
+  <tr>
+    <!-- Remove the next line if you don''t want the Yellow bar on the left side -->
+    <td style="background:#ffb900;padding:5pt 2pt 5pt 2pt"></td>
+
+    <td width="100%" cellpadding="7px 6px 7px 15px" style="background:#fff8e5;padding:5pt 4pt 5pt 12pt;word-wrap:break-word">
+      <div style="color:#222222;">
+        <span style="color:#222; font-weight:bold;">Caution:</span>
+       EXTERNAL SENDER WARNING. This message was sent from outside your organisation. Please do not click links or open attachments unless you recognise the source of this email and know the content is safe.
+      </div>
+    </td>
+  </tr>
+</table>
+<br />']]></commandBlock>
+    </version>
+  </rule>
+  <rule name="Phishing mail disclaimer" id="270d37b5-04a9-4ebc-b0ce-0aa130cbebdd" format="cmdlet">
+    <version requiredMinVersion="15.0.3.0">
+      <commandBlock><![CDATA[New-TransportRule -Name 'Phishing mail disclaimer' -Enabled $False -Mode Enforce -SentToScope InOrganization -SubjectContainsWords 'transaction', 'urgent', 'important', 'bank', '$', '€', 'lottery', 'dollar' -FromScope NotInOrganization -SetAuditSeverity 'Medium' -ApplyHtmlDisclaimerLocation Prepend -ApplyHtmlDisclaimerFallbackAction Wrap -ApplyHtmlDisclaimerText 'ATTENTION: This email has originated from a source external to your organization and includes certain keywords commonly associated with phishing attempts. Exercise discretion as such messages may intend to deceive or distribute malicious software. We urge you to remain vigilant and validate the legitimacy of emails before proceeding with any actions.']]></commandBlock>
+    </version>
+  </rule>
+</rules>
