@@ -1,13 +1,8 @@
 ﻿<#
-________      _____            ______  __                    
-____  _/________  /_______________  / / /____  ____   ______ 
- __  / __  __ \  __/  _ \_  ___/_  /_/ /__  / / /_ | / /  _ \
-__/ /  _  / / / /_ /  __/  /   _  __  / _  /_/ /__ |/ //  __/
-/___/  /_/ /_/\__/ \___//_/    /_/ /_/  _\__, / _____/ \___/ 
-                                        /____/               
+╦╔═┌┬┐┌─┐┬  ┌─┐┌─┐┌┐┌┬ ┬┬ ┬┌┐┌┌┬┐
+╠╩╗│││├┤ │  ├┤ │ ││││├─┤│ ││││ │ 
+╩ ╩┴ ┴└─┘┴─┘└─┘└─┘┘└┘┴ ┴└─┘┘└┘ ┴ 
 
-SCRIPT CREATED BY : THOMAS AMANN
- 
     .SYNOPSIS
        Import Mail FLow rules to Tenant
 
@@ -61,4 +56,5 @@ foreach ($rule in $rulesToImport)
     Write-Host "Importing rule '$($rule.Name)' $index/$($rulesToImport.Count)."
 
     Invoke-Expression $($rule.version.commandBlock.InnerText) | Out-Null
+
 }
