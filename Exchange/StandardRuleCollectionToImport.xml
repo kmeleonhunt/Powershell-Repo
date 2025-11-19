@@ -18,7 +18,7 @@
   <rule name="External Email Warning" id="24051b8d-3e0a-4e47-b575-471a2421ff73" format="cmdlet">
     <version requiredMinVersion="15.0.3.0">
       <commandBlock><![CDATA[New-TransportRule -Name 'External Email Warning' -Comments '
-' -Mode Enforce -RecipientDomainIs 'acaps.org' -FromScope NotInOrganization -ApplyHtmlDisclaimerLocation Prepend -ApplyHtmlDisclaimerFallbackAction Wrap -ApplyHtmlDisclaimerText '<!-- Yellow caution banner -->
+' -Mode Enforce -RecipientDomainIs 'contoso.com' -FromScope NotInOrganization -ApplyHtmlDisclaimerLocation Prepend -ApplyHtmlDisclaimerFallbackAction Wrap -ApplyHtmlDisclaimerText '<!-- Yellow caution banner -->
 <table border=0 cellspacing=0 cellpadding=0 align="left" width="100%">
   <tr>
     <!-- Remove the next line if you don''t want the Yellow bar on the left side -->
