@@ -18,16 +18,6 @@
 
 #>
 
-<#
-.FUNCTIONS
-#>
-
-<#
-.USER INPUT
-#>
-
-#####################################
-
 
 # Connect to SharePoint Online
 $url = Read-Host "Input Admin URL"
